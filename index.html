@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>10-25副本.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<style>
+#box {
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+span{
+	width: 50px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	color: #fff;
+	background:red;
+	float:left;
+	border-radius: 50%;
+	margin:5px;
+}
+.q5{
+	width: 100px;
+	height: 100px;
+	border: #000 1px solid;
+	float:left;
+	overflow:hidden;
+}
+#btn5 {
+	float: left;
+	margin: 100px 10px 0 10px;
+}
+#box6 {
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+
+</style>
+<script>
+window.onload = function(){
+	//创建div
+	var oBox = document.getElementById('box');
+	var oH3 = document.createElement('h3');
+	oH3.innerHTML = '我是一个H3标签';
+	oBox.appendChild(oH3);
+	//打字机效果
+	var str = '的时候回出错,会认为括号没写完,的时候回出错,会认为括号没写完,的时候回出错,会认为括号没写完,的时候回出错,会认为括号没写完,的时候回出错完,解决方法是';
+	var timer = null;
+	var iNow = 0;
+	timer = setInterval(function(){
+		iNow++;
+		if(iNow == str.length - 1){
+			clearInterval(timer);	
+		}
+		var oDiv = document.createElement('span');
+		oDiv.innerHTML = str.charAt(iNow);		
+		document.body.appendChild(oDiv);	
+	},100);
+	//简易留言板
+	var oTxt2 = document.getElementById('txt2');
+	var oBtn2 = document.getElementById('btn2');
+	var oBox2 = document.getElementById('box2');
+	    oBtn2.onclick = function(){
+		var oLi2 = document.createElement('li');
+		oLi2.innerHTML = oTxt2.value + '<a href="javascript:;">隐藏</a>';
+		
+		if(oBox2.children.length){
+			oBox2.insertBefore(oLi2,oBox2.children[0]);	
+		}else{
+			oBox2.appendChild(oLi2);		
+		}
+		
+		oTxt2.value = '';
+		oLi2.children[0].onclick = function(){
+			oBox2.removeChild(this.parentNode);
+		}
+	}
+	//上移和下移
+	var oBox3 = document.getElementById('box3');
+	var aBtn3 = oBox3.getElementsByTagName('a');
+	
+	for(var i = 0; i < aBtn3.length; i++){
+		if(i%2 == 0){
+			aBtn3[i].onclick = function(){
+				var obj3 = this.parentNode;
+				var oPrev3 = obj3.previousElementSibling || obj3.previousSibling;
+				if(obj3 == oBox3.children[0]){
+					alert('已经到第一个了');	
+					return;
+				}    
+				oBox3.insertBefore(obj3,oPrev3);	
+			}	
+		}else{
+			aBtn3[i].onclick = function(){
+				var obj3 = this.parentNode;
+				var oNext = obj3.nextElementSibling || obj3.nextSibling;
+				var oNext1 = oNext.nextElementSibling || oNext.nextSibling;
+				if(obj3 == oBox3.children[oBox3.children.length - 1]){
+					alert('已经到最后了');	
+					return;
+				}
+				oBox3.insertBefore(obj3,oNext1);	
+			}
+		}
+	} 
+	//添加元素
+	var oBox4 = document.getElementById('box4');
+	var oBtn4 = document.getElementById('btn4');
+	var oH4 = document.getElementById('h4');
+	oBtn4.onclick = function(){
+		var oH44 = document.createElement('h44');
+		oH44.innerHTML = '我是一个H4标签<br>';
+		oBox4.insertBefore(oH44,oH4);	
+	}
+	//移动
+	var oBox5 = document.getElementById('box5');
+	var oBox55 = document.getElementById('box55');
+	var oBtn5 = document.getElementById('btn5');
+	
+	oBtn5.onclick = function(){
+		oBox55.insertBefore(oBox5.children[0],oBox55.children[0]);
+	}
+	//元素本身宽
+	var oBox6 = document.getElementById('box6');
+	
+	oBox6.onclick = function(){
+		//alert(oBox6.offsetWidth);
+		alert(oBox6.offsetHeight);	
+	}
+	
+	
+}
+</script>
+</head>
+
+<body>
+
+<div id="box"></div>
+
+请留言:<input type="text" value="" id="txt2"/>
+<input type="button" value="添加" id="btn2"/>
+
+<ul id="box2"></ul>
+
+<ul id="box3">
+    <li><a href="javascript:;">上移</a>111111<a href="javascript:;">下移</a></li>
+    <li><a href="javascript:;">上移</a>222222<a href="javascript:;">下移</a></li>
+    <li><a href="javascript:;">上移</a>333333<a href="javascript:;">下移</a></li>
+    <li><a href="javascript:;">上移</a>444444<a href="javascript:;">下移</a></li>
+    <li><a href="javascript:;">上移</a>555555<a href="javascript:;">下移</a></li>
+    <li><a href="javascript:;">上移</a>666666<a href="javascript:;">下移</a></li>
+</ul>
+
+<input type="button" value="添加" id="btn4"/>
+<div id="box4">
+	<h2 id="h4">我是一个H2标签</h2>
+</div>
+
+<ul id="box5" class="q5">
+	<li>123214323</li>
+    <li>1232sasaddsa14323</li>
+    <li>fresgergre</li>
+    <li>bmhjkjl;jkq3</li>
+</ul>
+<input type="button" value="移动" id="btn5"/>
+<ol id="box55" class="q5"></ol><br><br><br><br><br><br><br><br>
+
+点击显示图片的宽,高
+<div id="box6"></div>
+
+</body>
+</html>
+
